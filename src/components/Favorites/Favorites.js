@@ -32,17 +32,14 @@ class Favorites extends Component {
     }
 
     searchBoxSubmitHandler = (e) => {
-        let data = new FormData(e.target);
-         let nameToMovie = data.get('saveMovie');
-         this.setState({ title: nameToMovie });
-         console.log(this.state)
-        // fetch( url, {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-type': 'application/json'
-        //     },
-        //     body: JSON.stringify(this.state)
-        // });
+        console.log(this.state);
+        fetch( url, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(this.state)
+        });
         e.preventDefault();
     }
 
@@ -51,29 +48,29 @@ class Favorites extends Component {
         const { title } = this.state;
 
         return (
-            <div className="favorites" onSubmit={this.searchBoxSubmitHandler}>
-                <form>
-                    <input 
-                        value={ title } 
-                        placeholder="Введите названия списка" 
-                        className="favorites__name" 
-                        onChange={this.searchLineChangeHandler}
-                        name="saveMovie"
-                    /> 
-                    <ul className="favorites__list">
-                        {this.state.movies.map((item) => {
-                            return <li key={item.imdbID}>
-                                        {item.Title}
-                                        ({item.Year})
-                                        <button type="button" onClick={() => this.removeMovie(item.imdbID)}>-</button>
-                                    </li>;
-                        })}
-                    </ul>
-                    { this.state.showList
+            <div className="favorites" >
+                <input 
+                    value={ title } 
+                    placeholder="Введите названия списка" 
+                    className="favorites__name" 
+                    onChange={this.searchLineChangeHandler}
+                    name="saveMovie"
+                /> 
+                <ul className="favorites__list">
+                    {this.state.movies.map((item) => {
+                        return (
+                            <li key={item.imdbID}>
+                                {item.Title}
+                                ({item.Year})
+                                <button type="button" onClick={() => this.removeMovie(item.imdbID)}>-</button>
+                            </li>
+                        )
+                    })}
+                </ul>
+                { this.state.showList
                     ? <button type="submit" className="favorites__save" >Перейти к списку</button>
-                    : <button type="submit" className="favorites__save" >Сохранить список</button>
-                    }
-                </form>
+                    : <button type="submit" className="favorites__save" onClick={this.searchBoxSubmitHandler}>Сохранить список</button>
+                }
             </div>
         );
     }
