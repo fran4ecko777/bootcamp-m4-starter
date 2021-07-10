@@ -3,22 +3,7 @@ import {add, remove, requestMovie} from '../actions/MovieAction';
 
 let newinitialState = {
     cartMovies: [],
-    movies: [
-        {
-            imdbID: 'tt3896198',
-            title: "Guardians of the Galaxy Vol. 2",
-            year: 2017,
-            poster: "https://m.media-amazon.com/images/M/MV5BNjM0NTc0NzItM2FlYS00YzEwLWE0YmUtNTA2ZWIzODc2OTgxXkEyXkFqcGdeQXVyNTgwNzIyNzg@._V1_SX300.jpg"
-
-        },
-        {
-            imdbID: '',
-            title: "",
-            year: 1972,
-            poster: "https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg"
-
-        }
-    ]
+    movies: []
 }
 //state = initialState  - это установка значений глобального state по умолчанию.
 function reducer(state = newinitialState, action) {
@@ -36,7 +21,9 @@ function reducer(state = newinitialState, action) {
         state.cartMovies = newData;
     } else if (action.type === requestMovie) {
         let newFilm = action.addToNewFilm
-        console.log(newFilm)
+        let movies = [...state.movies, newFilm]
+        state.movies = movies
+        return {...state}
     }
     return state;
 }
