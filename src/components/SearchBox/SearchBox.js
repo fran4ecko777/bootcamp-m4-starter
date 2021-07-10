@@ -17,6 +17,7 @@ class SearchBox extends Component {
     searchLineChangeHandler = (e) => {
         this.setState({ searchLine: e.target.value });
     }
+    
     searchBoxSubmitHandler = (e) => {
         let data = new FormData(e.target);
         let nameToMovie = data.get('requestMovie');

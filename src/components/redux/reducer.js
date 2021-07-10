@@ -9,6 +9,9 @@ let newinitialState = {
 function reducer(state = newinitialState, action) {
 
     if (action.type === add) {
+        if (state.cartMovies.find(item => item.imdbID === action.productIdToAddMovie)) {
+            return state;
+        }
         // 1 Найти нужный фильм в массиве товаров по переданому imdbID
         let productMovie = state.movies.find(item => item.imdbID === action.productIdToAddMovie);
         // 2 Добавить нужный фильм в корзину к уже имеющимся в корзине фильмам

@@ -11,6 +11,13 @@ class Movies extends Component {
     componentDidMount () {
         let globalState = store.getState();
         this.setState({movies: globalState.movies})
+        
+        store.subscribe(() => {
+            const globalState = store.getState();
+            this.setState({
+                movies: globalState.movies
+            });
+        });
     }
 
     render() { 
