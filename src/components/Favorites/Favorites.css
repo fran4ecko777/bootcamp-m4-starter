@@ -24,6 +24,7 @@
     color: #FFEEDB;
     font-size: 14px;
     transition: all 0.2s linear;
+    margin-top: 5px;
 }
 
 .favorites__save:hover {

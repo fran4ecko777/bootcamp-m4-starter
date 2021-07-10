@@ -1,16 +1,39 @@
 import React, { Component } from 'react';
 import './SearchBox.css';
+import store from '../redux/store';
+import {requestMovie} from '../actions/MovieAction'; 
+
+
+const apiKey = 'd24afc9b';
+const url = 'https://www.omdbapi.com/?';
+
 
 class SearchBox extends Component {
     state = {
-        searchLine: ''
+        searchLine: '',
+        
     }
+    
     searchLineChangeHandler = (e) => {
         this.setState({ searchLine: e.target.value });
     }
     searchBoxSubmitHandler = (e) => {
+        let data = new FormData(e.target);
+        let nameToMovie = data.get('requestMovie');
+        fetch(`${url}s=${nameToMovie}&apikey=${apiKey}`)
+            .then(response => response.json())
+            .then(data => {
+                store.dispatch({
+                    type:requestMovie,
+                    addToNewFilm: data.Search,
+                })
+            })
+            .catch(error => {
+                console.log(error)
+            })
         e.preventDefault();
     }
+
     render() {
         const { searchLine } = this.state;
 
@@ -25,6 +48,7 @@ class SearchBox extends Component {
                             className="search-box__form-input"
                             placeholder="Например, Shawshank Redemption"
                             onChange={this.searchLineChangeHandler}
+                            name="requestMovie"
                         />
                     </label>
                     <button
@@ -39,5 +63,5 @@ class SearchBox extends Component {
         );
     }
 }
- 
+
 export default SearchBox;
