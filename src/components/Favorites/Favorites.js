@@ -28,7 +28,8 @@ class Favorites extends Component {
     render() { 
         return (
             <div className="favorites">
-                <input value="Новый список" className="favorites__name" />
+                <input   className="favorites__name" /> 
+                {/* value="Новый список" */}
                 <ul className="favorites__list">
                     {this.state.movies.map((item) => {
                         return <li key={item.imdbID}>

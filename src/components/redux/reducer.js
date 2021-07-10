@@ -20,10 +20,11 @@ function reducer(state = newinitialState, action) {
         });
         state.cartMovies = newData;
     } else if (action.type === requestMovie) {
-        let newFilm = action.addToNewFilm
-        let movies = [...state.movies, newFilm]
-        state.movies = movies
-        return {...state}
+        let newFilm = action.addToNewFilm;
+        let clone = {...state};
+        clone.movies = newFilm;
+
+        return clone;
     }
     return state;
 }
