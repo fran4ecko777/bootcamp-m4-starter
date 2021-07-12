@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './Favorites.css';
 import store from '../redux/store';
 import {remove} from '../actions/MovieAction'
+import {BrowserRouter, Link} from 'react-router-dom';
 
 const url = 'https://acb-api.algoritmika.org/api/movies/list';
 
@@ -32,14 +33,24 @@ class Favorites extends Component {
     }
 
     searchBoxSubmitHandler = (e) => {
-        console.log(this.state);
-        fetch( url, {
+        let result = fetch( url, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json'
             },
             body: JSON.stringify(this.state)
         });
+        result
+            .then((data) => {
+                this.setState({
+                    showList: true,
+                })
+                console.log(data)
+                console.log(this.state)
+            })
+            .catch((error) => {
+                console.log(error);
+            })
         e.preventDefault();
     }
 
@@ -48,32 +59,34 @@ class Favorites extends Component {
         const { title } = this.state;
 
         return (
-            <div className="favorites" >
-                <input 
-                    value={ title } 
-                    placeholder="Введите названия списка" 
-                    className="favorites__name" 
-                    onChange={this.searchLineChangeHandler}
-                    name="saveMovie"
-                /> 
-                <ul className="favorites__list">
-                    {this.state.movies.map((item) => {
-                        return (
-                            <li key={item.imdbID}>
-                                {item.Title}
-                                ({item.Year})
-                                <button type="button" onClick={() => this.removeMovie(item.imdbID)}>-</button>
-                            </li>
-                        )
-                    })}
-                </ul>
-                { this.state.showList
-                    ? <button type="submit" className="favorites__save" >Перейти к списку</button>
-                    : <button type="submit" className="favorites__save" onClick={this.searchBoxSubmitHandler}>Сохранить список</button>
-                }
-            </div>
+            <BrowserRouter>
+                <div className="favorites" >
+                    <input 
+                        value={ title } 
+                        placeholder="Введите названия списка" 
+                        className="favorites__name" 
+                        onChange={this.searchLineChangeHandler}
+                        name="saveMovie"
+                    /> 
+                    <ul className="favorites__list">
+                        {this.state.movies.map((item) => {
+                            return (
+                                <li key={item.imdbID}>
+                                    {item.Title}
+                                    ({item.Year})
+                                    <button type="button" onClick={() => this.removeMovie(item.imdbID)}>-</button>
+                                </li>
+                            )
+                        })}
+                    </ul>
+                    { this.state.showList
+                        ? <Link to={"/list/:id"} type="submit" className="favorites__save" >Перейти к списку</Link>
+                        : <button type="submit" className="favorites__save" onClick={this.searchBoxSubmitHandler}>Сохранить список</button>
+                    }
+                </div>
+            </BrowserRouter>
         );
     }
 }
-
+ 
 export default Favorites;

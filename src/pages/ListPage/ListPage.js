@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './ListPage.css';
+import { Route } from 'react-router';
 
 class ListPage extends Component {
     state = {
@@ -8,7 +9,7 @@ class ListPage extends Component {
         ]
     }
     componentDidMount() {
-        const id = this.props.match.params;
+        const id = this.props.match.params.id;
         console.log(id);
         // TODO: запрос к сервер на получение списка
         // TODO: запросы к серверу по всем imdbID
