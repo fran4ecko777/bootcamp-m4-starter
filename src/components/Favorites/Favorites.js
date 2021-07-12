@@ -10,7 +10,8 @@ class Favorites extends Component {
     state = {
         title: '',
         movies: [],
-        showList: false
+        showList: false,
+        id:'',
     }
 
     componentDidMount() {
@@ -24,7 +25,7 @@ class Favorites extends Component {
     removeMovie = (id) => {
         store.dispatch({
             type: remove,
-            removeToMovie: id,
+            removeToMovie: id
         });
     }
 
@@ -44,9 +45,10 @@ class Favorites extends Component {
         .then((data) => {
             this.setState({
                 showList: true,
-                movies: []
+                movies: [],
+                id: data.id
             })
-            console.log(data)
+            // console.log(data.id)
             console.log(this.state)
         })
         .catch((error) => {
@@ -81,7 +83,7 @@ class Favorites extends Component {
                         })}
                     </ul>
                     { this.state.showList
-                        ? <Link to={"/list/:id"} type="submit" className="favorites__save" >Перейти к списку</Link>
+                        ? <Link to={"/list/" + this.state.id} type="submit" className="favorites__save" >Перейти к списку</Link>
                         : <button type="submit" className="favorites__save" onClick={this.searchBoxSubmitHandler}>Сохранить список</button>
                     }
                 </div>
