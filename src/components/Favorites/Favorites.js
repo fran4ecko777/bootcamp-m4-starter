@@ -33,24 +33,25 @@ class Favorites extends Component {
     }
 
     searchBoxSubmitHandler = (e) => {
-        let result = fetch( url, {
+        fetch( url, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json'
             },
             body: JSON.stringify(this.state)
-        });
-        result
-            .then((data) => {
-                this.setState({
-                    showList: true,
-                })
-                console.log(data)
-                console.log(this.state)
+        })
+        .then(response => response.json())
+        .then((data) => {
+            this.setState({
+                showList: true,
+                movies: []
             })
-            .catch((error) => {
-                console.log(error);
-            })
+            console.log(data)
+            console.log(this.state)
+        })
+        .catch((error) => {
+            console.log(error);
+        })  
         e.preventDefault();
     }
 
