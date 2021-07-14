@@ -26,7 +26,6 @@ function reducer(state = newinitialState, action) {
         let newFilm = action.addToNewFilm;
         let clone = {...state};
         clone.movies = newFilm;
-
         return clone;
     }
     return state;

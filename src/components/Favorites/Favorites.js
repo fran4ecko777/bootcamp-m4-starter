@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './Favorites.css';
 import store from '../redux/store';
 import {remove} from '../actions/MovieAction'
-import {BrowserRouter, Link} from 'react-router-dom';
+import { Link} from 'react-router-dom';
 
 const url = 'https://acb-api.algoritmika.org/api/movies/list';
 
@@ -44,12 +44,11 @@ class Favorites extends Component {
         .then(response => response.json())
         .then((data) => {
             this.setState({
+                title: '',
                 showList: true,
                 movies: [],
                 id: data.id
             })
-            // console.log(data.id)
-            console.log(this.state)
         })
         .catch((error) => {
             console.log(error);
@@ -62,7 +61,6 @@ class Favorites extends Component {
         const { title } = this.state;
 
         return (
-            <BrowserRouter>
                 <div className="favorites" >
                     <input 
                         value={ title } 
@@ -87,7 +85,7 @@ class Favorites extends Component {
                         : <button type="submit" className="favorites__save" onClick={this.searchBoxSubmitHandler}>Сохранить список</button>
                     }
                 </div>
-            </BrowserRouter>
+
         );
     }
 }

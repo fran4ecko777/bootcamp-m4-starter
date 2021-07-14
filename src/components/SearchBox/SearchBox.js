@@ -24,6 +24,7 @@ class SearchBox extends Component {
         fetch(`${url}s=${nameToMovie}&apikey=${apiKey}`)
             .then(response => response.json())
             .then(data => {
+                console.log(data)
                 store.dispatch({
                     type:requestMovie,
                     addToNewFilm: data.Search,
