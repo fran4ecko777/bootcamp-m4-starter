@@ -4,7 +4,6 @@ import './ListPage.css';
 
 const urlAlgoritmika = 'https://acb-api.algoritmika.org/api/movies/list/';
 const url1 = 'https://www.omdbapi.com/?';
-let idUrl = [];
 const apiKey = 'd24afc9b';
 let result = [];
 let clone = [];
@@ -23,10 +22,10 @@ class ListPage extends Component {
         })
         .then((data) => {
             data.movies.map(item => {
-                idUrl = item.imdbID
-                fetch(`${url1}i=${idUrl}&apikey=${apiKey}`)
+                fetch(`${url1}i=${item.imdbID}&apikey=${apiKey}`)
                 .then(response => response.json())
                 .then((data) => {
+                    // clone = {...data}
                     clone = JSON.parse(JSON.stringify(data))
                     result.push(clone)
                     this.setState({
@@ -51,7 +50,7 @@ class ListPage extends Component {
                     {this.state.movies.map((item) => {
                         return (
                             <li key={item.imdbID}>
-                                <a href="https://www.imdb.com/title/tt0068646/" target="_blank">{item.Title} ({item.Year})</a>
+                                <a href={"https://www.imdb.com/title/" + item.imdbID + "/"} target="_blank">{item.Title} ({item.Year})</a>
                             </li>
                         );
                     })}
@@ -62,3 +61,7 @@ class ListPage extends Component {
 }
 
 export default ListPage;
+
+
+// 26f58e7c-cf39-4e19-bcce-85b884654a05
+// 0e4eed02-e66f-4705-ab0c-9e048e76f98b
