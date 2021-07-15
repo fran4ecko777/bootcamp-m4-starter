@@ -63,7 +63,7 @@ class Favorites extends Component {
         return (
                 <div className="favorites" >
                     <input 
-                        value={ title } 
+                        value={title} 
                         placeholder="Введите названия списка" 
                         className="favorites__name" 
                         onChange={this.searchLineChangeHandler}
@@ -82,12 +82,12 @@ class Favorites extends Component {
                     </ul>
                     { this.state.showList
                         ? <Link to={"/list/" + this.state.id} type="submit" className="favorites__save" >Перейти к списку</Link>
-                        : <button type="submit" className="favorites__save" onClick={this.searchBoxSubmitHandler}>Сохранить список</button>
+                        : <button disabled={!title} type="submit" className="favorites__save" onClick={this.searchBoxSubmitHandler}>Сохранить список</button>
                     }
                 </div>
 
         );
     }
 }
- 
+
 export default Favorites;

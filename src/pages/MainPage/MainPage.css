@@ -17,3 +17,14 @@
 .main-page__favorites {
     width: 35%;   
 }
+
+@media (max-width: 900px) {
+    .main-page__main-section,
+    .main-page__favorites {
+        min-width: 100%;
+        box-sizing: border-box;
+    }
+    .main-page__main-section {
+        order: 2;
+    }
+}
