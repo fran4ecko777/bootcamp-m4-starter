@@ -2,10 +2,12 @@
     padding: 42px calc(50% - 500px);
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
+    margin: 10px;
 }
 
 .main-page__main-section {
-    padding-left: 40px;
+    padding: 10px;
     box-sizing: border-box;
     width: 60%;
 }
