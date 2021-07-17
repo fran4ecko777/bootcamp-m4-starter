@@ -17,7 +17,7 @@ class SearchBox extends Component {
     
     searchLineChangeHandler = (e) => {
         this.setState({ searchLine: e.target.value });
-        let nameMovies = e.target.name;
+        let nameMovies = e.target.value;
         
         if ( nameMovies === 'requestMovie') {
             let regMovie = /^[a-zA-Zа-яА-Я'][a-zA-Zа-яА-Я-' ]+[a-zA-Zа-яА-Я']?$/u;
