@@ -11,27 +11,29 @@ const url = 'https://www.omdbapi.com/?';
 class SearchBox extends Component {
     state = {
         searchLine: '',
-        isValid: false,
-        NameError: "",
+        isValid:false,
+        Error: "",
     }
     
     searchLineChangeHandler = (e) => {
         this.setState({ searchLine: e.target.value });
-        let regMovie = /^[a-zA-Zа-яА-Я'][a-zA-Zа-яА-Я-' ]+[a-zA-Zа-яА-Я']?$/u;
-        let result = requestMovie.match(regMovie);
+        let nameMovies = e.target.name;
         
-        
-        
-        if (result !== null) {
-            this.setState({
-                isValid: true,
-                NameError: ""
-            });   
-        } else {
-            this.setState({
-                isValid: false,
-                NameError: "Поиск происходит на Латинском Языке"
-            });
+        if ( nameMovies === 'requestMovie') {
+            let regMovie = /^[a-zA-Zа-яА-Я'][a-zA-Zа-яА-Я-' ]+[a-zA-Zа-яА-Я']?$/u;
+            let result = requestMovie.match(regMovie);
+            
+            if (result !== null) {
+                this.setState({
+                    isValid: true,
+                    Error: ""
+                });   
+            } else {
+                this.setState({
+                    isValid: false,
+                    Error: "Поиск происходит на Латинском Языке"
+                });
+            }
         }
     }
     
@@ -69,8 +71,7 @@ class SearchBox extends Component {
                             onChange={this.searchLineChangeHandler}
                             name="requestMovie"
                         />
-                    </label>
-                    <div className="error">{this.state.fullNameError}</div>
+                    </label> 
                     <button
                         type="submit"
                         className="search-box__form-submit"
@@ -79,6 +80,7 @@ class SearchBox extends Component {
                         Искать
                     </button>
                 </form>
+            <div className="error">{this.state.Error}</div>
             </div>
         );
     }
