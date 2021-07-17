@@ -19,9 +19,10 @@ class SearchBox extends Component {
         this.setState({ searchLine: e.target.value });
         let nameMovies = e.target.value;
         
-        if ( nameMovies === 'requestMovie') {
-            let regMovie = /^[a-zA-Zа-яА-Я'][a-zA-Zа-яА-Я-' ]+[a-zA-Zа-яА-Я']?$/u;
-            let result = requestMovie.match(regMovie);
+        // if ( nameMovies === 'requestMovie') {
+            let regMovie = /^[а-яА-Я']+$/u;
+            let result = regMovie.test(nameMovies);
+            console.log('---', result);
             
             if (result !== null) {
                 this.setState({
@@ -34,7 +35,7 @@ class SearchBox extends Component {
                     Error: "Поиск происходит на Латинском Языке"
                 });
             }
-        }
+        // }
     }
     
     searchBoxSubmitHandler = (e) => {
