@@ -11,11 +11,28 @@ const url = 'https://www.omdbapi.com/?';
 class SearchBox extends Component {
     state = {
         searchLine: '',
-        
+        isValid: false,
+        NameError: "",
     }
     
     searchLineChangeHandler = (e) => {
         this.setState({ searchLine: e.target.value });
+        let regMovie = /^[a-zA-Zа-яА-Я'][a-zA-Zа-яА-Я-' ]+[a-zA-Zа-яА-Я']?$/u;
+        let result = requestMovie.match(regMovie);
+        
+        
+        
+        if (result !== null) {
+            this.setState({
+                isValid: true,
+                NameError: ""
+            });   
+        } else {
+            this.setState({
+                isValid: false,
+                NameError: "Поиск происходит на Латинском Языке"
+            });
+        }
     }
     
     searchBoxSubmitHandler = (e) => {
@@ -53,6 +70,7 @@ class SearchBox extends Component {
                             name="requestMovie"
                         />
                     </label>
+                    <div className="error">{this.state.fullNameError}</div>
                     <button
                         type="submit"
                         className="search-box__form-submit"
