@@ -31,4 +31,6 @@
     cursor: pointer;
     opacity: 0.9;
     transition: all 0.2s linear;
+    cursor: not-allowed;
+    background-color: #6c6c6d;
 }
